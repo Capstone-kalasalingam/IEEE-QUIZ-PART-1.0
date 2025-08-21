@@ -1,0 +1,215 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* IEEE COMSOC KARE Design System - Professional Testing Platform */
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 210 100% 12%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 210 100% 12%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 210 100% 12%;
+
+    --primary: 210 100% 20%;
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 210 100% 12%;
+
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
+
+    --accent: 210 40% 96%;
+    --accent-foreground: 210 100% 12%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 0%;
+
+    --success: 142 76% 36%;
+    --success-foreground: 0 0% 98%;
+
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 210 100% 20%;
+
+    --radius: 0.75rem;
+
+    /* IEEE COMSOC Brand Colors */
+    --ieee-navy: 210 100% 20%;
+    --ieee-blue: 210 100% 35%;
+    --ieee-light-blue: 210 100% 95%;
+    --ieee-white: 0 0% 100%;
+    --ieee-gray: 210 10% 50%;
+    
+    /* Status Colors */
+    --status-active: 142 76% 36%;
+    --status-blocked: 0 84% 60%;
+    --status-warning: 38 92% 50%;
+    --status-pending: 210 100% 35%;
+
+    /* Admin Red Theme Colors */
+    --admin-primary: 0 84% 50%;
+    --admin-primary-foreground: 0 0% 98%;
+    --admin-secondary: 0 100% 96%;
+    --admin-secondary-foreground: 0 84% 15%;
+    --admin-accent: 0 84% 95%;
+    --admin-muted: 0 20% 96%;
+    --admin-border: 0 32% 91%;
+  }
+
+  .dark {
+    --background: 210 100% 4%;
+    --foreground: 0 0% 98%;
+    --card: 210 100% 4%;
+    --card-foreground: 0 0% 98%;
+    --popover: 210 100% 4%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 210 100% 4%;
+    --secondary: 210 100% 12%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 210 100% 12%;
+    --muted-foreground: 215 20% 65%;
+    --accent: 210 100% 12%;
+    --accent-foreground: 0 0% 98%;
+    --border: 210 100% 12%;
+    --input: 210 100% 12%;
+    --ring: 212 27% 84%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border font-poppins;
+  }
+
+  body {
+    @apply bg-background text-foreground font-poppins;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* Fullscreen styles */
+  .fullscreen-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.95);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+  }
+
+  .countdown-animation {
+    animation: pulse-warning 1s ease-in-out infinite;
+  }
+
+  @keyframes pulse-warning {
+    0%, 100% { 
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% { 
+      transform: scale(1.05);
+      opacity: 0.8;
+    }
+  }
+
+  /* No-select for security */
+  .no-select {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  /* Disable right-click context menu */
+  .disable-context {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  /* Admin theme classes */
+  .admin-theme {
+    --primary: var(--admin-primary);
+    --primary-foreground: var(--admin-primary-foreground);
+    --secondary: var(--admin-secondary);
+    --secondary-foreground: var(--admin-secondary-foreground);
+    --accent: var(--admin-accent);
+    --muted: var(--admin-muted);
+    --border: var(--admin-border);
+  }
+}
+
+@layer components {
+  /* IEEE COMSOC Component Variants */
+  .btn-ieee-primary {
+    @apply bg-[hsl(var(--ieee-navy))] text-white hover:bg-[hsl(var(--ieee-blue))] 
+           transition-all duration-200 font-semibold px-6 py-3 rounded-lg
+           shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 font-poppins;
+  }
+
+  .btn-ieee-secondary {
+    @apply bg-white text-[hsl(var(--ieee-navy))] border-2 border-[hsl(var(--ieee-navy))]
+           hover:bg-[hsl(var(--ieee-light-blue))] transition-all duration-200 
+           font-semibold px-6 py-3 rounded-lg shadow-md hover:shadow-lg font-poppins;
+  }
+
+  .btn-warning {
+    @apply bg-[hsl(var(--warning))] text-[hsl(var(--warning-foreground))]
+           hover:bg-yellow-500 transition-all duration-200 font-semibold 
+           px-6 py-3 rounded-lg shadow-lg font-poppins;
+  }
+
+  .btn-danger {
+    @apply bg-[hsl(var(--destructive))] text-white hover:bg-red-600
+           transition-all duration-200 font-semibold px-6 py-3 rounded-lg shadow-lg font-poppins;
+  }
+
+  .card-ieee {
+    @apply bg-white border border-[hsl(var(--border))] rounded-xl shadow-lg
+           p-6 transition-all duration-200 hover:shadow-xl;
+  }
+
+  .status-active {
+    @apply bg-[hsl(var(--status-active))] text-white px-3 py-1 rounded-full text-sm font-medium font-poppins;
+  }
+
+  .status-blocked {
+    @apply bg-[hsl(var(--status-blocked))] text-white px-3 py-1 rounded-full text-sm font-medium font-poppins;
+  }
+
+  .status-warning {
+    @apply bg-[hsl(var(--status-warning))] text-black px-3 py-1 rounded-full text-sm font-medium font-poppins;
+  }
+
+  .status-pending {
+    @apply bg-[hsl(var(--status-pending))] text-white px-3 py-1 rounded-full text-sm font-medium font-poppins;
+  }
+
+  /* Admin theme components */
+  .btn-admin-primary {
+    @apply bg-red-600 text-white hover:bg-red-700 transition-all duration-200 
+           font-semibold px-4 py-2 rounded-lg shadow-lg hover:shadow-xl font-poppins;
+  }
+
+  .btn-admin-secondary {
+    @apply bg-white text-red-600 border-2 border-red-600 hover:bg-red-50 
+           transition-all duration-200 font-semibold px-4 py-2 rounded-lg shadow-md font-poppins;
+  }
+}
