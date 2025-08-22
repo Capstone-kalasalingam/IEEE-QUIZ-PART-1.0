@@ -279,6 +279,15 @@ const QuizInterface: React.FC<QuizInterfaceProps> = ({ studentData, examId, sess
 
       setCurrentQuestionIndex(-1);
 
+      // Close the tab automatically after successful submission
+      setTimeout(() => {
+        window.close();
+        // Fallback if window.close() doesn't work (some browsers block it)
+        if (!window.closed) {
+          window.location.href = 'about:blank';
+        }
+      }, 2000);
+
     } catch (error) {
       console.error('Error submitting quiz:', error);
       toast.error("❌ Submission Error: Failed to submit your quiz. Please try again.", {
@@ -365,7 +374,16 @@ const QuizInterface: React.FC<QuizInterfaceProps> = ({ studentData, examId, sess
   const displayTimeRemaining = getDisplayTimeRemaining();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-ieee-light-blue via-white to-ieee-light-blue font-poppins" style={noSelectStyle}>
+    <div className="min-h-screen bg-gradient-to-br from-ieee-light-blue via-white to-ieee-light-blue font-poppins relative" style={noSelectStyle}>
+      {/* IEEE ComSoc Watermark */}
+      <div className="fixed inset-0 flex items-center justify-center pointer-events-none z-10">
+        <img 
+          src="/lovable-uploads/3ada9145-fa49-4a6c-b5ff-5c226b3640b8.png" 
+          alt="IEEE ComSoc Watermark" 
+          className="w-96 h-96 opacity-5 object-contain"
+        />
+      </div>
+
       <div className="bg-white/95 backdrop-blur-sm border-b border-ieee-navy/10 sticky top-0 z-40">
         <div className="max-w-4xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
@@ -392,7 +410,7 @@ const QuizInterface: React.FC<QuizInterfaceProps> = ({ studentData, examId, sess
         </div>
       </div>
 
-      <div className="max-w-4xl mx-auto px-4 py-8">
+      <div className="max-w-4xl mx-auto px-4 py-8 relative z-20">
         <Card className="mb-6">
           <CardHeader>
             <CardTitle className="text-lg text-ieee-navy">

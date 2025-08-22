@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { User, IdCard, Eye, EyeOff, AlertTriangle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -165,13 +166,13 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
         {/* Login Form - Right Side */}
         <div className="flex-1 max-w-md">
           <div className="bg-white rounded-3xl shadow-2xl p-8 text-center my-[70px] py-[33px] px-[22px] mx-0">
-            {/* IEEE ComSoc Logo */}
+            {/* IEEE ComSoc Logo - Made Bigger */}
             <div className="flex justify-center mb-6">
-              <div className="w-20 h-20 bg-white rounded-2xl flex items-center justify-center shadow-lg">
+              <div className="w-32 h-32 bg-white rounded-3xl flex items-center justify-center shadow-lg">
                 <img 
                   src="/lovable-uploads/3ada9145-fa49-4a6c-b5ff-5c226b3640b8.png" 
                   alt="IEEE ComSoc Logo" 
-                  className="h-16 w-auto object-contain"
+                  className="h-28 w-auto object-contain"
                 />
               </div>
             </div>
