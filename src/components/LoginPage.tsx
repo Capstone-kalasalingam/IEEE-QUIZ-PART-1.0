@@ -3,12 +3,12 @@ import { User, IdCard, Eye, EyeOff, AlertTriangle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { supabase } from '@/integrations/supabase/client';
+
 interface LoginPageProps {
   onLogin: (studentData: any) => void;
 }
-const LoginPage: React.FC<LoginPageProps> = ({
-  onLogin
-}) => {
+
+const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
   const [email, setEmail] = useState('');
   const [registrationNo, setRegistrationNo] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -39,21 +39,26 @@ const LoginPage: React.FC<LoginPageProps> = ({
     const interval = setInterval(measurePing, 2000);
     return () => clearInterval(interval);
   }, []);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
     setError('');
     try {
       // Query the student_details table using type assertion to bypass the types issue
-      const {
-        data,
-        error: queryError
-      } = await (supabase as any).from('student_details').select('*').eq('email', email.toLowerCase()).eq('registration_no', registrationNo.toUpperCase()).single();
+      const { data, error: queryError } = await (supabase as any)
+        .from('student_details')
+        .select('*')
+        .eq('email', email.toLowerCase())
+        .eq('registration_no', registrationNo.toUpperCase())
+        .single();
+
       if (queryError) {
         console.error('Query error:', queryError);
         setError('Invalid credentials. Please check your email and registration number.');
         return;
       }
+
       if (data) {
         console.log('Login successful:', data);
         onLogin(data);
@@ -72,10 +77,13 @@ const LoginPage: React.FC<LoginPageProps> = ({
       setIsLoading(false);
     }
   };
+
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
-  return <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center p-4 font-poppins">
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center p-4 font-poppins">
       <div className="w-full max-w-6xl flex gap-8 my-0">
         {/* Security Notice - Left Side */}
         <div className="flex-1 max-w-md">
@@ -158,9 +166,13 @@ const LoginPage: React.FC<LoginPageProps> = ({
         <div className="flex-1 max-w-md">
           <div className="bg-white rounded-3xl shadow-2xl p-8 text-center my-[70px] py-[33px] px-[22px] mx-0">
             {/* IEEE ComSoc Logo */}
-            <div className="flex justify-center mb-6 my-0 py-[23px]">
+            <div className="flex justify-center mb-6">
               <div className="flex items-center justify-center">
-                <img src="/lovable-uploads/3ada9145-fa49-4a6c-b5ff-5c226b3640b8.png" alt="IEEE ComSoc Logo" className="h-26 w-auto object-contain" />
+                <img 
+                  src="/lovable-uploads/3ada9145-fa49-4a6c-b5ff-5c226b3640b8.png" 
+                  alt="IEEE ComSoc Logo" 
+                  className="h-24 w-auto object-contain"
+                />
               </div>
             </div>
 
@@ -179,34 +191,64 @@ const LoginPage: React.FC<LoginPageProps> = ({
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="relative">
                 <User className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
-                <Input type="email" placeholder="Email Address" value={email} onChange={e => setEmail(e.target.value)} required className="pl-12 h-12 bg-gray-50 border-gray-200 rounded-xl text-base placeholder:text-gray-400 focus:bg-white focus:border-ieee-blue font-poppins" />
+                <Input
+                  type="email"
+                  placeholder="Email Address"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  className="pl-12 h-12 bg-gray-50 border-gray-200 rounded-xl text-base placeholder:text-gray-400 focus:bg-white focus:border-ieee-blue font-poppins"
+                />
               </div>
 
               <div className="relative">
                 <IdCard className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
-                <Input type={showPassword ? "text" : "password"} placeholder="Registration Number" value={registrationNo} onChange={e => setRegistrationNo(e.target.value)} required className="pl-12 pr-12 h-12 bg-gray-50 border-gray-200 rounded-xl text-base placeholder:text-gray-400 focus:bg-white focus:border-ieee-blue font-poppins" />
-                <button type="button" onClick={togglePasswordVisibility} className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors">
+                <Input
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Registration Number"
+                  value={registrationNo}
+                  onChange={(e) => setRegistrationNo(e.target.value)}
+                  required
+                  className="pl-12 pr-12 h-12 bg-gray-50 border-gray-200 rounded-xl text-base placeholder:text-gray-400 focus:bg-white focus:border-ieee-blue font-poppins"
+                />
+                <button
+                  type="button"
+                  onClick={togglePasswordVisibility}
+                  className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
+                >
                   {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
                 </button>
               </div>
 
-              {error && <div className="bg-red-50 border border-red-200 rounded-lg p-3">
+              {error && (
+                <div className="bg-red-50 border border-red-200 rounded-lg p-3">
                   <p className="text-sm text-red-600 font-poppins">{error}</p>
-                </div>}
+                </div>
+              )}
 
-              <Button type="submit" disabled={isLoading} className="w-full h-12 bg-ieee-navy hover:bg-ieee-blue text-white font-semibold rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl mt-6 font-poppins">
-                {isLoading ? <div className="flex items-center justify-center">
+              <Button
+                type="submit"
+                disabled={isLoading}
+                className="w-full h-12 bg-ieee-navy hover:bg-ieee-blue text-white font-semibold rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl mt-6 font-poppins"
+              >
+                {isLoading ? (
+                  <div className="flex items-center justify-center">
                     <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                       <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                       <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                     </svg>
                     Accessing...
-                  </div> : 'Access Test Platform'}
+                  </div>
+                ) : (
+                  'Access Test Platform'
+                )}
               </Button>
             </form>
           </div>
         </div>
       </div>
-    </div>;
+    </div>
+  );
 };
+
 export default LoginPage;
