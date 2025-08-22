@@ -167,11 +167,11 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
           <div className="bg-white rounded-3xl shadow-2xl p-8 text-center my-[70px] py-[33px] px-[22px] mx-0">
             {/* IEEE ComSoc Logo */}
             <div className="flex justify-center mb-6">
-              <div className="w-20 h-20 bg-white rounded-2xl flex items-center justify-center shadow-lg">
+              <div className="flex items-center justify-center">
                 <img 
                   src="/lovable-uploads/3ada9145-fa49-4a6c-b5ff-5c226b3640b8.png" 
                   alt="IEEE ComSoc Logo" 
-                  className="h-16 w-auto object-contain"
+                  className="h-24 w-auto object-contain"
                 />
               </div>
             </div>
