@@ -312,6 +312,16 @@ const QuizInterface: React.FC<QuizInterfaceProps> = ({ studentData, examId, sess
     return sessionDuration >= (examData.duration * 60);
   };
 
+  // Text selection prevention styles
+  const noSelectStyle = {
+    userSelect: 'none' as const,
+    WebkitUserSelect: 'none' as const,
+    MozUserSelect: 'none' as const,
+    msUserSelect: 'none' as const,
+    WebkitTouchCallout: 'none' as const,
+    WebkitTapHighlightColor: 'transparent'
+  };
+
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
@@ -355,7 +365,7 @@ const QuizInterface: React.FC<QuizInterfaceProps> = ({ studentData, examId, sess
   const displayTimeRemaining = getDisplayTimeRemaining();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-ieee-light-blue via-white to-ieee-light-blue font-poppins">
+    <div className="min-h-screen bg-gradient-to-br from-ieee-light-blue via-white to-ieee-light-blue font-poppins" style={noSelectStyle}>
       <div className="bg-white/95 backdrop-blur-sm border-b border-ieee-navy/10 sticky top-0 z-40">
         <div className="max-w-4xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between">

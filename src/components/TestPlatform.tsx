@@ -432,13 +432,25 @@ const TestPlatform: React.FC = () => {
     );
   }
 
+  // Apply text selection restrictions when authenticated and in exam mode
+  const examStyles = isAuthenticated && !isBlocked ? {
+    userSelect: 'none' as const,
+    WebkitUserSelect: 'none' as const,
+    MozUserSelect: 'none' as const,
+    msUserSelect: 'none' as const,
+    WebkitTouchCallout: 'none' as const,
+    WebkitTapHighlightColor: 'transparent'
+  } : {};
+
   return (
-    <TestInterface 
-      studentData={studentData} 
-      onDisqualify={handleDisqualify} 
-      sessionStartTime={sessionStartTime}
-      currentViolations={violations}
-    />
+    <div style={examStyles}>
+      <TestInterface 
+        studentData={studentData} 
+        onDisqualify={handleDisqualify} 
+        sessionStartTime={sessionStartTime}
+        currentViolations={violations}
+      />
+    </div>
   );
 };
 
