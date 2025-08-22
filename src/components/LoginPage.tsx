@@ -1,6 +1,5 @@
-
 import React, { useState, useEffect } from 'react';
-import { Shield, User, IdCard, Eye, EyeOff, AlertTriangle } from 'lucide-react';
+import { User, IdCard, Eye, EyeOff, AlertTriangle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { supabase } from '@/integrations/supabase/client';
@@ -166,10 +165,14 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
         {/* Login Form - Right Side */}
         <div className="flex-1 max-w-md">
           <div className="bg-white rounded-3xl shadow-2xl p-8 text-center my-[70px] py-[33px] px-[22px] mx-0">
-            {/* Shield Icon */}
+            {/* IEEE ComSoc Logo */}
             <div className="flex justify-center mb-6">
-              <div className="w-20 h-20 bg-gradient-to-br from-ieee-navy to-ieee-blue rounded-2xl flex items-center justify-center shadow-lg">
-                <Shield className="h-10 w-10 text-white" />
+              <div className="w-20 h-20 bg-white rounded-2xl flex items-center justify-center shadow-lg">
+                <img 
+                  src="/lovable-uploads/3ada9145-fa49-4a6c-b5ff-5c226b3640b8.png" 
+                  alt="IEEE ComSoc Logo" 
+                  className="h-16 w-auto object-contain"
+                />
               </div>
             </div>
 
