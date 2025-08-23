@@ -1,9 +1,7 @@
-
 import React, { useState, useMemo } from 'react';
 import { Users, CheckCircle, XCircle, Settings, Eye, EyeOff, Search, Plus, Edit } from 'lucide-react';
 import ExamManagement from './ExamManagement';
 import MarksManagement from './MarksManagement';
-import UserResponsesManagement from './UserResponsesManagement';
 import AddStudentDialog from './AddStudentDialog';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -513,8 +511,6 @@ const AdminDashboardContent: React.FC<AdminDashboardContentProps> = ({
         return <ExamManagement />;
       case 'marks':
         return <MarksManagement />;
-      case 'responses':
-        return <UserResponsesManagement />;
       case 'analytics':
         return renderPlaceholder('Analytics', 'View detailed analytics and reports');
       case 'notifications':
